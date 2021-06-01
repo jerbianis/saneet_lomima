@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="Jerbi Anis" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{ asset('js/scripts.js') }}"></script>
+
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" >
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="{{ path('home') }}">Saneet Lomima</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ path('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ path('product_index') }}">All Products</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="#!">Orders</a></li>
+                            <li><a class="dropdown-item" href="#!">Cart</a></li>
+
+                        </ul>
+                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <li><a class="dropdown-item" href="{{ path('user_index') }}">Manage Users</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="{{ path('product_index') }}">Manage Products</a></li>
+                            <li><a class="dropdown-item" href="#!">Manage Orders</a></li>
+
+                        </ul>
+                    </li>
+                    {% endif %}
+                </ul>
+
+                    {% if is_granted('ROLE_USER') %}
+                    <form class="d-flex">
+                            <button class="btn btn-outline-dark" type="submit">
+                                <i class="bi-cart-fill me-1"></i>
+                                Cart
+                                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            </button>
+                    </form>
+                    {% endif %}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY')==false %}
+                    <form class="d-flex" action="{{ path('app_login') }}">
+                            <button class="btn btn-outline-dark" type="submit">
+                                Sign in
+                                <i class="bi-person-fill"></i>
+                            </button>
+                    </form>
+                    {% endif %}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <form class="d-flex" action="{{ path('app_logout') }}">
+                            <button class="btn btn-outline-dark" type="submit" >
+                                Logout
+                                <i class="bi-person-x-fill"></i>
+                            </button>
+                    </form>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div style="margin-top: 7vh;"></div>
+        {% block body %}{% endblock %}
+
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Saneet Lomima 2021</p></div>
+    </footer>
+    </body>
+</html>

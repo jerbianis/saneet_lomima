@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.SCHEMA:saneet_lomima</OriginalElement>
+  <nodes>
+    <node x="-12.937853107345006" y="299.37853107344625">623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.cart</node>
+    <node x="0.9999999999997158" y="488.0056497175142">623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.cart_item</node>
+    <node x="878.8886165610097" y="299.3785310734463">623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.status</node>
+    <node x="247.9856991525421" y="155.37853107344628">623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.user</node>
+    <node x="270.9856991525421" y="478.95480225988695">623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.product</node>
+    <node x="1128.196327683616" y="125.49717514124295">623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.doctrine_migration_versions</node>
+    <node x="582.9713983050844" y="299.3785310734463">623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.order</node>
+    <node x="583.9713983050844" y="488.0056497175142">623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.order_item</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.cart" target="623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.user" relationship="REFERENCES">
+      <point x="0.0" y="-54.5" />
+      <point x="54.562146892654994" y="360.8022598870057" />
+      <point x="358.9856991525421" y="360.8022598870057" />
+      <point x="0.0" y="126.5" />
+    </edge>
+    <edge source="623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.order_item" target="623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.product" relationship="REFERENCES">
+      <point x="-33.25" y="-78.5" />
+      <point x="617.2213983050844" y="567.8022598870057" />
+      <point x="358.9856991525421" y="567.8022598870057" />
+      <point x="0.0" y="78.5" />
+    </edge>
+    <edge source="623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.order" target="623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.user" relationship="REFERENCES">
+      <point x="0.0" y="-54.5" />
+      <point x="650.4713983050844" y="360.8022598870057" />
+      <point x="358.9856991525421" y="360.8022598870057" />
+      <point x="0.0" y="126.5" />
+    </edge>
+    <edge source="623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.cart_item" target="623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.product" relationship="REFERENCES">
+      <point x="33.25" y="-78.5" />
+      <point x="100.74999999999972" y="567.8022598870057" />
+      <point x="358.9856991525421" y="567.8022598870057" />
+      <point x="0.0" y="78.5" />
+    </edge>
+    <edge source="623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.cart_item" target="623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.cart" relationship="REFERENCES">
+      <point x="-33.25" y="-78.5" />
+      <point x="34.249999999999716" y="555.8022598870057" />
+      <point x="54.562146892654994" y="555.8022598870057" />
+      <point x="0.0" y="54.5" />
+    </edge>
+    <edge source="623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.status" target="623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.order" relationship="REFERENCES">
+      <point x="-84.0" y="-12.0" />
+      <point x="67.5" y="0.0" />
+    </edge>
+    <edge source="623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.order_item" target="623b6327-0bf8-4e5b-a8b5-a03dcf03db6f.TABLE:saneet_lomima.order" relationship="REFERENCES">
+      <point x="33.25" y="-78.5" />
+      <point x="683.7213983050844" y="567.8022598870057" />
+      <point x="650.4713983050844" y="567.8022598870057" />
+      <point x="0.0" y="54.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0729257641921397" showDependencies="false" x="504.5091575091575" y="426.2397232397233" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
