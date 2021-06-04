@@ -1,22 +1,68 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
-
+{% block stylesheets %}
+    #intro {
+    background-image: url(https://mdbootstrap.com/img/new/fluid/city/008.jpg);
+    height: 100vh;
+    }
+    @media (min-width: 992px) {
+    #intro {
+    margin-top: -58.59px;
+    }
+    }
+{% endblock %}
 {% block body %}
+<div id="intro" class="bg-image shadow-2-strong">
+    <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-5 col-md-8">
+                    <div class="bg-white rounded shadow-5-strong p-5">
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
-
+    <div class="col text-center">
+        <h1 class="h3 mb-3 font-weight-normal" style="font-family: Pattaya;font-size: xx-large">Register</h1>
+    </div>
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.fullname) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
+
+        <div class="form-outline mb-4">
+            <div class="form-label">{{ form_label(registrationForm.fullname) }}</div>
+            {% if form_errors(registrationForm.fullname) %}
+                <div class="alert alert-danger" role="alert">{{ form_errors(registrationForm.fullname) }}</div>
+            {% endif %}
+            <div>{{ form_widget(registrationForm.fullname)}}</div>
+        </div>
+
+        <div class="form-outline mb-4">
+            <div class="form-label">{{ form_label(registrationForm.email) }}</div>
+            {% if form_errors(registrationForm.email) %}
+                <div class="alert alert-danger" style="font-size: small" role="alert">{{ form_errors(registrationForm.email) }}</div>
+            {% endif %}
+            <div>{{ form_widget(registrationForm.email)}}</div>
+        </div>
+
+        <div class="form-outline mb-4">{{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        </div>
 
-        <button type="submit" class="btn">Register</button>
+        <div class="form-outline mb-4">{{ form_row(registrationForm.agreeTerms) }}</div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Register</button>
+            <div style="font-family:Ubuntu;margin-top: 2%">
+                If you have already an account ..
+                <a href="{{ path('app_login') }}">Sign in</a>
+            </div>
+        </div>
     {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
