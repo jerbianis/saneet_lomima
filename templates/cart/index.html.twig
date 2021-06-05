@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+    {% if cart %}
+    {% for item in cart.cartItems %}
+        the product name {{ item.product.name }}<br>
+        the product quantity {{ item.quantity }}<br>
+        the product total price{{ item.itemprice }}<br>
+        <hr>
+    {% endfor %}
+    <h2>The total cart price is {{ cart.totalPrice }}</h2>
+        {% else %}
+        <h2>No Cart Found</h2>
+    {% endif %}
+
+{% endblock %}

@@ -44,7 +44,7 @@
                             <li><a class="dropdown-item" href="{{ path('product_index') }}">All Products</a></li>
                             <li><hr class="dropdown-divider" /></li>
                             <li><a class="dropdown-item" href="#!">Orders</a></li>
-                            <li><a class="dropdown-item" href="#!">Cart</a></li>
+                            <li><a class="dropdown-item" href="{{ path('cart') }}">Cart</a></li>
 
                         </ul>
                     </li>
@@ -64,15 +64,8 @@
                     {% endif %}
                 </ul>
 
-                    {% if is_granted('ROLE_USER') %}
-                    <form class="d-flex">
-                            <button class="btn btn-outline-dark" type="submit">
-                                <i class="bi-cart-fill me-1"></i>
-                                Cart
-                                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                            </button>
-                    </form>
-                    {% endif %}
+
+                    {{ render(controller('App\\Controller\\CartController::cartnav')) }}
                     {% if is_granted('IS_AUTHENTICATED_FULLY')==false %}
                     <form class="d-flex" action="{{ path('app_login') }}">
                             <button class="btn btn-outline-dark" type="submit">

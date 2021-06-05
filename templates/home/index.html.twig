@@ -42,9 +42,8 @@
                             </div>
                         </div>
                         <!-- Product actions-->
-                        <form>
+                        <form action="{{ path('cart_item_new', {'id': product.id}) }}">
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <input type="hidden" value="{{ product.id }}">
                             <div class="text-center"><button class="btn btn-outline-dark mt-auto" type="submit" >Add to cart</button></div>
                         </div>
                         </form>
