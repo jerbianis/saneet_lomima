@@ -7,8 +7,9 @@ use App\Entity\CartItem;
 use App\Entity\Product;
 use App\Form\CartItemType;
 use App\Repository\CartItemRepository;
+use App\Repository\CartRepository;
+use mysql_xdevapi\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,15 +19,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CartItemController extends AbstractController
 {
-    /**
-     * @Route("/", name="cart_item_index", methods={"GET"})
-     */
-    public function index(CartItemRepository $cartItemRepository): Response
-    {
-        return $this->render('cart_item/index.html.twig', [
-            'cart_items' => $cartItemRepository->findAll(),
-        ]);
-    }
 
     /**
      * @Route("/new/{id}", name="cart_item_new", methods={"GET"})
@@ -69,18 +61,36 @@ class CartItemController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
-    
-//    /**
-//     * @Route("/{id}", name="cart_item_delete", methods={"POST"})
-//     */
-//    public function delete(Request $request, CartItem $cartItem): Response
-//    {
-//        if ($this->isCsrfTokenValid('delete'.$cartItem->getId(), $request->request->get('_token'))) {
-//            $entityManager = $this->getDoctrine()->getManager();
-//            $entityManager->remove($cartItem);
-//            $entityManager->flush();
-//        }
-//
-//        return $this->redirectToRoute('cart_item_index');
-//    }
+
+    /**
+     * @Route("/delete/{id}", name="cart_item_delete", methods={"GET"})
+     */
+    public function delete(Product $product,CartItemRepository $cartItemRepository,CartRepository $cartRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $user=$this->getUser();
+        $entityManager = $this->getDoctrine()->getManager();
+        $cart=$user->getCart();
+        $cartItem=$cartItemRepository->findOneBy(['cart'=> $cart,'product'=>$product]);
+        if($cartItem->getQuantity()==1){
+            $cartItem->getCart()->setTotalPrice($cartItem->getCart()->getTotalPrice() - $product->getPrice());
+            $cart->removeCartItem($cartItem);
+            $entityManager->remove($cartItem);
+        }else{
+            $cartItem->setQuantity($cartItem->getQuantity() - 1);
+            $cartItem->setItemPrice($cartItem->getItemPrice() - $product->getPrice());
+            $cartItem->getCart()->setTotalPrice($cartItem->getCart()->getTotalPrice() - $product->getPrice());
+        }
+
+        if ($cartRepository->findOneBy(['user' => $this->getUser()])->getTotalPrice()==0){
+            $entityManager->remove($cart);
+        }
+
+
+        $entityManager->persist($cartItem);
+        $entityManager->persist($cart);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('cart');
+    }
 }

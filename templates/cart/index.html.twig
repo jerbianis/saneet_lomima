@@ -8,6 +8,7 @@
         the product name {{ item.product.name }}<br>
         the product quantity {{ item.quantity }}<br>
         the product total price{{ item.itemprice }}<br>
+        <a href="{{ path('cart_item_delete', {'id': item.product.id}) }}">delete</a>
         <hr>
     {% endfor %}
     <h2>The total cart price is {{ cart.totalPrice }}</h2>
